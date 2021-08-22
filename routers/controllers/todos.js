@@ -20,7 +20,7 @@ const getAllTodos = (req, res) => {
         const { task,description ,isCompleted, deadline, priority } = req.body;
       
         const Todo = new todoModel({
-            task,
+          task,
           description,
           isCompleted,
           deadline,
@@ -37,7 +37,7 @@ const getAllTodos = (req, res) => {
           });
       };
 
-const completedtaskes (req,res)=>{
+const completedtaskes = (req,res)=>{
   todoModel.find ({isCompleted : true 
   })
   .then((result) => {
@@ -50,12 +50,28 @@ const completedtaskes (req,res)=>{
 }
 
 
-const updateTodo = () => {}
+const updateTodo = (req,res) => {
+
+
+}
 
 
 
 
-const deleteTodo = () => {}
+const deleteTodo = (req,res) => {
+  // console.log("hi")
+// const state = req.params.state
+// console.log(state)
+// console.log(state)
+todoModel.findOneAndDelete ({isCompleted:false}  ,  (err, docs)=> {
+  if (err){
+      console.log(err)
+  }
+  else{
+      console.log("Deleted User : ", docs);
+  }
+})
+}
 
-module.exports = { getAllTodos, createTodo, updateTodo, deleteTodo };
+module.exports = { getAllTodos, createTodo, updateTodo, deleteTodo ,completedtaskes };
 
